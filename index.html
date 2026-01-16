@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Hatunum Nisa 💜</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    background: linear-gradient(180deg,#1a001f,#2b0033);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ŞİFRE EKRANI */
+#lockScreen{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+}
+
+#lockScreen h1{
+    margin-bottom:20px;
+    color:#ffb3ff;
+}
+
+input{
+    padding:12px;
+    border-radius:10px;
+    border:none;
+    font-size:18px;
+    text-align:center;
+    width:200px;
+}
+
+button{
+    margin-top:15px;
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    background:#ff4fd8;
+    color:white;
+    font-size:18px;
+    cursor:pointer;
+}
+
+/* ANA İÇERİK */
+#content{
+    display:none;
+}
+
+.section{
+    min-height:100vh;
+    padding:40px 20px;
+    text-align:center;
+}
+
+.section img{
+    width:90%;
+    max-width:350px;
+    border-radius:20px;
+    box-shadow:0 0 20px rgba(255,105,180,0.6);
+    margin-bottom:20px;
+}
+
+h2{
+    color:#ffb3ff;
+}
+
+/* KALP ANİMASYONU */
+.heart{
+    position:fixed;
+    bottom:-20px;
+    font-size:20px;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-110vh);
+        opacity:0;
+    }
+}
+
+/* BÜYÜK KALP */
+.big-heart{
+    font-size:120px;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.2);}
+    100%{transform:scale(1);}
+}
+
+/* SÜRPRİZ BUTON */
+#surpriseMsg{
+    display:none;
+    margin-top:20px;
+    font-size:22px;
+    color:#ffb3ff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- MÜZİK -->
+<audio id="music" loop>
+    <source src="yasardan-divane.mp3" type="audio/mpeg">
+</audio>
+
+<!-- ŞİFRE EKRANI -->
+<div id="lockScreen">
+    <h1>Tanışma Tarihimiz 💜</h1>
+    <input type="password" id="password" placeholder="Şifreyi gir">
+    <button onclick="checkPassword()">Giriş</button>
+</div>
+
+<!-- ANA İÇERİK -->
+<div id="content">
+
+    <div class="section">
+        <h2>⬇️</h2>
+    </div>
+
+    <div class="section">
+        <img src="foto1.jpg">
+        <h2>Benim dünyalar güzeli sevgilim  
+        ömrümün en güzeli</h2>
+    </div>
+
+    <div class="section">
+        <img src="foto2.jpg">
+        <h2>Elini tutmak, sana sarılmak  
+        en huzur bulduğum an…</h2>
+    </div>
+
+    <div class="section">
+        <img src="foto3.jpg">
+        <h2>İlk buluşmamızda bile  
+        iyi ki’m olduğunu anladım</h2>
+    </div>
+
+    <div class="section" id="heartsSection"></div>
+
+    <div class="section">
+        <div class="big-heart">💜</div>
+        <h2>Kalbim hep senin için atıyor</h2>
+
+        <button onclick="showSurprise()">Sürprizi Aç 💝</button>
+        <div id="surpriseMsg">Kurban olduğum iyi ki sen 💜</div>
+    </div>
+
+</div>
+
+<script>
+function checkPassword(){
+    const pass = document.getElementById("password").value;
+    if(pass === "140625"){
+        document.getElementById("lockScreen").style.display="none";
+        document.getElementById("content").style.display="block";
+        document.getElementById("music").play();
+        createFloatingHearts();
+        create750Hearts();
+    }else{
+        alert("Yanlış şifre 💔");
+    }
+}
+
+/* UÇAN KALPLER */
+function createFloatingHearts(){
+    setInterval(()=>{
+        const heart = document.createElement("div");
+        heart.className="heart";
+        heart.innerText="💜";
+        heart.style.left = Math.random()*100 + "vw";
+        heart.style.animationDuration = (3+Math.random()*3)+"s";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),6000);
+    },200);
+}
+
+/* 750 KALP */
+function create750Hearts(){
+    const container = document.getElementById("heartsSection");
+    let hearts="";
+    for(let i=0;i<750;i++){
+        hearts+="💜";
+    }
+    container.innerHTML = hearts;
+    container.style.fontSize="20px";
+}
+
+/* SÜRPRİZ */
+function showSurprise(){
+    document.getElementById("surpriseMsg").style.display="block";
+}
+</script>
+
+</body>
+</html>
